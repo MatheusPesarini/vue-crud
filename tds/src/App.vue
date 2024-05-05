@@ -1,6 +1,7 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" :class="theme">
+    <HelloWorld @toggleTheme="toggleTheme"/>
+  </div>
 </template>
 
 <script>
@@ -10,17 +11,29 @@ export default {
   name: 'App',
   components: {
     HelloWorld
-  }
-}
+  },
+  data() {
+    return {
+      theme: 'light',
+    };
+  },
+  methods: {
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+      document.body.className = this.theme;
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body.light {
+    background-color: #fff;
+    color: #000;
+  }
+
+  body.dark {
+    background-color: #363636;
+    color: #fff;
+  }
 </style>
